@@ -37,6 +37,19 @@
             <option value="by-person">Vue par intervenant</option>
           </select>
         </div>
+
+        <form id="print-form" class="inline-form print-tools">
+          <label>
+            Du
+            <input type="date" id="print-start" name="startDate" required />
+          </label>
+          <label>
+            Au
+            <input type="date" id="print-end" name="endDate" required />
+          </label>
+          <button type="submit">Imprimer la période</button>
+        </form>
+
         <div id="planning-view"></div>
       </section>
     </main>

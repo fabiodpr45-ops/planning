@@ -184,3 +184,31 @@ button.secondary {
     flex-wrap: wrap;
   }
 }
+
+
+.actions-row {
+  display: inline-flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+button.small {
+  padding: 0.35rem 0.55rem;
+  font-size: 0.82rem;
+}
+
+button.danger {
+  background: #b22828;
+  color: white;
+}
+
+.print-tools {
+  margin-top: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.print-tools label {
+  display: grid;
+  gap: 0.3rem;
+  color: #33415f;
+}

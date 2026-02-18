@@ -12,6 +12,10 @@ const subcontractorSelect = assignmentForm?.elements.subcontractorId;
 const viewMode = document.getElementById('view-mode');
 const planningView = document.getElementById('planning-view');
 
+const printForm = document.getElementById('print-form');
+const printStart = document.getElementById('print-start');
+const printEnd = document.getElementById('print-end');
+
 function option(value, label) {
   return `<option value="${value}">${label}</option>`;
 }
@@ -93,6 +97,65 @@ function renderPlanning() {
   }
 }
 
+function renderPrintableHtml(startDate, endDate) {
+  const filtered = state.assignments
+    .map(enrich)
+    .filter((item) => item.date >= startDate && item.date <= endDate)
+    .sort((a, b) => a.date.localeCompare(b.date));
+
+  const rows = filtered
+    .map(
+      (item) =>
+        `<tr><td>${item.date}</td><td>${item.siteName}</td><td>${item.workerName}</td><td>${item.subcontractorName}</td></tr>`
+    )
+    .join('');
+
+  const tableRows = rows || '<tr><td colspan="4">Aucune affectation sur cette période</td></tr>';
+
+  return `<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Impression planning</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 24px; color: #1d2740; }
+    h1 { margin-bottom: 4px; }
+    p { margin-top: 0; color: #4a5678; }
+    table { width: 100%; border-collapse: collapse; margin-top: 14px; }
+    th, td { border: 1px solid #ccd6ee; padding: 8px; text-align: left; }
+    th { background: #edf2ff; }
+  </style>
+</head>
+<body>
+  <h1>Planning DPR45</h1>
+  <p>Période du <strong>${startDate}</strong> au <strong>${endDate}</strong></p>
+  <table>
+    <thead>
+      <tr><th>Date</th><th>Chantier</th><th>Ouvrier</th><th>Sous-traitant</th></tr>
+    </thead>
+    <tbody>${tableRows}</tbody>
+  </table>
+</body>
+</html>`;
+}
+
+function printPlanning(startDate, endDate) {
+  const printableWindow = window.open('', '_blank', 'width=1000,height=750');
+  if (!printableWindow) {
+    alert('Impossible d’ouvrir la fenêtre d’impression (popup bloquée).');
+    return;
+  }
+
+  printableWindow.document.open();
+  printableWindow.document.write(renderPrintableHtml(startDate, endDate));
+  printableWindow.document.close();
+
+  printableWindow.focus();
+  setTimeout(() => {
+    printableWindow.print();
+  }, 200);
+}
+
 assignmentForm?.addEventListener('submit', (event) => {
   event.preventDefault();
   const formData = new FormData(assignmentForm);
@@ -109,6 +172,24 @@ assignmentForm?.addEventListener('submit', (event) => {
   assignmentForm.reset();
   populateSelects();
   renderPlanning();
+});
+
+printForm?.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const startDate = printStart.value;
+  const endDate = printEnd.value;
+
+  if (!startDate || !endDate) {
+    alert('Sélectionne une date de début et une date de fin.');
+    return;
+  }
+
+  if (startDate > endDate) {
+    alert('La date de début doit être antérieure à la date de fin.');
+    return;
+  }
+
+  printPlanning(startDate, endDate);
 });
 
 viewMode?.addEventListener('change', renderPlanning);

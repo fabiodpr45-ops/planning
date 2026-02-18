@@ -5,6 +5,9 @@ Application web simple de planning pour :
 - gérer une base chantiers,
 - gérer une base sous-traitants,
 - créer des affectations chantier + ouvrier + sous-traitant,
+- consulter plusieurs vues du planning,
+- imprimer le planning sur une période de dates précises,
+- éditer/supprimer les ouvriers, sous-traitants et chantiers déjà enregistrés.
 - consulter plusieurs vues du planning.
 
 ## Pages
