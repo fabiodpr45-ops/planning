@@ -8,6 +8,7 @@ Application web simple de planning pour :
 - consulter plusieurs vues du planning,
 - imprimer le planning sur une période de dates précises,
 - éditer/supprimer les ouvriers, sous-traitants et chantiers déjà enregistrés.
+- consulter plusieurs vues du planning.
 
 ## Pages
 - `login.html` : page d'accueil/connexion (`DPR45` / `Isolation45`)

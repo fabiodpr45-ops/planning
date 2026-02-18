@@ -50,6 +50,13 @@ function render() {
         </span>
       </li>`
     )
+function render() {
+  workersList.innerHTML = state.workers
+    .map((w) => `<li><span>${w.name} <small>(${w.skill})</small></span><span class="badge">ouvrier</span></li>`)
+    .join('');
+
+  subcontractorsList.innerHTML = state.subcontractors
+    .map((s) => `<li><span>${s.name} <small>(${s.domain})</small></span><span class="badge">sous-traitant</span></li>`)
     .join('');
 
   sitesList.innerHTML = state.sites
@@ -61,6 +68,8 @@ function render() {
           <button type="button" class="danger small" data-action="delete-site" data-id="${s.id}">Supprimer</button>
         </span>
       </li>`
+      (s) =>
+        `<li><span><strong>${s.name}</strong> - ${s.location}<br><small>${s.startDate} → ${s.endDate}</small></span><span class="badge">chantier</span></li>`
     )
     .join('');
 }
@@ -75,6 +84,12 @@ workerForm?.addEventListener('submit', (event) => {
   });
   workerForm.reset();
   saveAndRender();
+    name: formData.get('name').toString(),
+    skill: formData.get('skill').toString()
+  });
+  saveData(state);
+  workerForm.reset();
+  render();
 });
 
 subcontractorForm?.addEventListener('submit', (event) => {
@@ -87,6 +102,12 @@ subcontractorForm?.addEventListener('submit', (event) => {
   });
   subcontractorForm.reset();
   saveAndRender();
+    name: formData.get('name').toString(),
+    domain: formData.get('domain').toString()
+  });
+  saveData(state);
+  subcontractorForm.reset();
+  render();
 });
 
 siteForm?.addEventListener('submit', (event) => {
@@ -185,6 +206,14 @@ sitesList?.addEventListener('click', (event) => {
     state.assignments = state.assignments.filter((item) => item.siteId !== id);
     saveAndRender();
   }
+    name: formData.get('name').toString(),
+    location: formData.get('location').toString(),
+    startDate: formData.get('startDate').toString(),
+    endDate: formData.get('endDate').toString()
+  });
+  saveData(state);
+  siteForm.reset();
+  render();
 });
 
 render();
