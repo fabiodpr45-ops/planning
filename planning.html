@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Planning DPR45 - Planning</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>Planning des chantiers</h1>
+      <nav>
+        <a href="dashboard.html">Bases de données</a>
+        <a class="active" href="planning.html">Planning</a>
+      </nav>
+      <button id="logout" class="secondary">Déconnexion</button>
+    </header>
+
+    <main class="layout">
+      <section class="card">
+        <h2>Nouvelle affectation</h2>
+        <form id="assignment-form" class="inline-form grid">
+          <select name="siteId" required></select>
+          <select name="workerId" required></select>
+          <select name="subcontractorId" required></select>
+          <input name="date" type="date" required />
+          <button type="submit">Affecter</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <div class="section-header">
+          <h2>Vues du planning</h2>
+          <select id="view-mode">
+            <option value="timeline">Vue chronologique</option>
+            <option value="by-site">Vue par chantier</option>
+            <option value="by-person">Vue par intervenant</option>
+          </select>
+        </div>
+
+        <form id="print-form" class="inline-form print-tools">
+          <label>
+            Du
+            <input type="date" id="print-start" name="startDate" required />
+          </label>
+          <label>
+            Au
+            <input type="date" id="print-end" name="endDate" required />
+          </label>
+          <button type="submit">Imprimer la période</button>
+        </form>
+
+        <div id="planning-view"></div>
+      </section>
+    </main>
+
+    <script type="module" src="scripts/planning.js"></script>
+  </body>
+</html>
