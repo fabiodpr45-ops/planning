@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Planning DPR45 - Connexion</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="auth-page">
+    <main class="auth-card">
+      <h1>Planning DPR45</h1>
+      <p>Connectez-vous pour gérer les ouvriers, chantiers et sous-traitants.</p>
+      <form id="login-form" class="stack">
+        <label>
+          Login
+          <input id="login" name="login" type="text" required />
+        </label>
+        <label>
+          Mot de passe
+          <input id="password" name="password" type="password" required />
+        </label>
+        <button type="submit">Se connecter</button>
+        <p id="login-error" class="error" aria-live="polite"></p>
+      </form>
+      <p class="hint">Identifiants demandés : <strong>DPR45</strong> / <strong>Isolation45</strong></p>
+    </main>
+
+    <script type="module" src="scripts/auth.js"></script>
+  </body>
+</html>

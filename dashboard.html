@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Planning DPR45 - Bases de données</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>Gestion des bases</h1>
+      <nav>
+        <a class="active" href="dashboard.html">Bases de données</a>
+        <a href="planning.html">Planning</a>
+      </nav>
+      <button id="logout" class="secondary">Déconnexion</button>
+    </header>
+
+    <main class="layout two-columns">
+      <section class="card">
+        <h2>Ouvriers</h2>
+        <form id="worker-form" class="inline-form">
+          <input name="name" placeholder="Nom de l'ouvrier" required />
+          <input name="skill" placeholder="Spécialité" required />
+          <button type="submit">Ajouter</button>
+        </form>
+        <ul id="workers-list" class="data-list"></ul>
+      </section>
+
+      <section class="card">
+        <h2>Sous-traitants</h2>
+        <form id="subcontractor-form" class="inline-form">
+          <input name="name" placeholder="Nom du sous-traitant" required />
+          <input name="domain" placeholder="Domaine" required />
+          <button type="submit">Ajouter</button>
+        </form>
+        <ul id="subcontractors-list" class="data-list"></ul>
+      </section>
+
+      <section class="card full-width">
+        <h2>Chantiers</h2>
+        <form id="site-form" class="inline-form grid">
+          <input name="name" placeholder="Nom du chantier" required />
+          <input name="location" placeholder="Lieu" required />
+          <input name="startDate" type="date" required />
+          <input name="endDate" type="date" required />
+          <button type="submit">Ajouter</button>
+        </form>
+        <ul id="sites-list" class="data-list"></ul>
+      </section>
+    </main>
+
+    <script type="module" src="scripts/dashboard.js"></script>
+  </body>
+</html>
